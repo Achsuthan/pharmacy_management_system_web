@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Header></Header>
     <router-view></router-view>
   </div>
 </template>
@@ -7,11 +8,15 @@
 <script>
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Header from './components/Header/Header'
 
 Vue.use(VueRouter)
 
 export default {
   name: 'app',
+  components:{
+    Header
+  }
 }
 </script>
 

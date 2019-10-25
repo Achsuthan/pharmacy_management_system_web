@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import SignIn from './components/SignInSignUp/SignIn'
 import SignUp from './components/SignInSignUp/SignUp'
 import Home from './components/Home/home'
+import Deliver from './components/Delivery/Delivery'
+import Orders from './components/Orders/Order'
 
 Vue.use(Router)
 
@@ -35,6 +37,16 @@ var router = new Router({
         path: '/home',
         name: 'Home',
         component: Home
+      },
+      {
+        path: '/deliver',
+        name: 'Home',
+        component: Deliver
+      },
+      {
+        path: '/orders',
+        name: 'Home',
+        component: Orders
       },
     {
       path: '*',
