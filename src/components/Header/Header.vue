@@ -1,7 +1,7 @@
 <template>
     <AppHeader fixed>
       <!-- <SidebarToggler class="d-lg-none" display="md" mobile /> -->
-      <b-link class="navbar-brand" to="#">
+      <b-link class="navbar-brand" to="/home">
         PMS
       </b-link>
       <b-navbar-nav class="d-md-down-none">

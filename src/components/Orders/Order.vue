@@ -1,27 +1,82 @@
 <template>
   <div class="wrapper">
     <div class="animated fadeIn">
-      
-      <b-card
-        header-tag="header"
-        footer-tag="footer">
+      <b-card >
         <div slot="header">
-          <i class="fa fa-align-justify"></i><strong> Bootstrap Navs </strong><small>justified tabs</small>
+          <i class="fa fa-align-justify"></i>
+          <strong></strong>
+          <small></small>
         </div>
-        <div>
-          <b-nav justified tabs>
-            <b-nav-item active>Current</b-nav-item>
-            <b-nav-item >Past</b-nav-item>
-          </b-nav>
-        </div>
+        
+        <b-row>
+          <b-col lg="12">
+            <c-table
+              :table-data="items"
+              striped
+              caption="<i class='fa fa-align-justify'></i> Current Order"
+            ></c-table>
+          </b-col>
+          <b-col lg="12">
+            <c-table
+              :table-data="items"
+              striped
+              caption="<i class='fa fa-align-justify'></i> Past Order"
+            ></c-table>
+          </b-col>
+        </b-row>
       </b-card>
     </div>
   </div>
 </template>
 
 <script>
+
+import { shuffleArray } from '@/shared/utils'
+import cTable from '../Delivery/Table'
+
+const someData = () => shuffleArray([
+  {username: 'Samppa Nori', registered: '2012/01/01', role: 'Member', status: 'Active'},
+  {username: 'Estavan Lykos', registered: '2012/02/01', role: 'Staff', status: 'Banned'},
+  {username: 'Chetan Mohamed', registered: '2012/02/01', role: 'Admin', status: 'Inactive'},
+  {username: 'Derick Maximinus', registered: '2012/03/01', role: 'Member', status: 'Pending'},
+  {username: 'Friderik Dávid', registered: '2012/01/21', role: 'Staff', status: 'Active'},
+  {username: 'Yiorgos Avraamu', registered: '2012/01/01', role: 'Member', status: 'Active'},
+  {username: 'Avram Tarasios', registered: '2012/02/01', role: 'Staff', status: 'Banned'},
+  {username: 'Quintin Ed', registered: '2012/02/01', role: 'Admin', status: 'Inactive'},
+  {username: 'Enéas Kwadwo', registered: '2012/03/01', role: 'Member', status: 'Pending'},
+  {username: 'Agapetus Tadeáš', registered: '2012/01/21', role: 'Staff', status: 'Active'},
+  {username: 'Carwyn Fachtna', registered: '2012/01/01', role: 'Member', status: 'Active'},
+  {username: 'Nehemiah Tatius', registered: '2012/02/01', role: 'Staff', status: 'Banned'},
+  {username: 'Ebbe Gemariah', registered: '2012/02/01', role: 'Admin', status: 'Inactive'},
+  {username: 'Eustorgios Amulius', registered: '2012/03/01', role: 'Member', status: 'Pending'},
+  {username: 'Leopold Gáspár', registered: '2012/01/21', role: 'Staff', status: 'Active'},
+  {username: 'Pompeius René', registered: '2012/01/01', role: 'Member', status: 'Active'},
+  {username: 'Paĉjo Jadon', registered: '2012/02/01', role: 'Staff', status: 'Banned'},
+  {username: 'Micheal Mercurius', registered: '2012/02/01', role: 'Admin', status: 'Inactive'},
+  {username: 'Ganesha Dubhghall', registered: '2012/03/01', role: 'Member', status: 'Pending'},
+  {username: 'Hiroto Šimun', registered: '2012/01/21', role: 'Staff', status: 'Active'},
+  {username: 'Vishnu Serghei', registered: '2012/01/01', role: 'Member', status: 'Active'},
+  {username: 'Zbyněk Phoibos', registered: '2012/02/01', role: 'Staff', status: 'Banned'},
+  {username: 'Einar Randall', registered: '2012/02/01', role: 'Admin', status: 'Inactive'},
+  {username: 'Félix Troels', registered: '2012/03/21', role: 'Staff', status: 'Active'},
+  {username: 'Aulus Agmundr', registered: '2012/01/01', role: 'Member', status: 'Pending'}
+])
 export default {
-  name: 'navs'
-}
+  name: "navs",
+  components: {cTable},
+  data: () => {
+    return {
+      isActive: false,
+      items: someData,
+      itemsArray: someData(),
+      fields: [
+        {key: 'username', label: 'User', sortable: true},
+        {key: 'registered'},
+        {key: 'role'},
+        {key: 'status', sortable: true}
+      ],
+    }
+  }
+};
 </script>
 
