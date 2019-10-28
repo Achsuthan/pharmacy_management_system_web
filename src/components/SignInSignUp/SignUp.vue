@@ -123,18 +123,22 @@ export default {
           email: this.email,
           password: this.password
         };
+        this.$store.dispatch("setLoading", true)
         if (!this.laboratory) {
           loginService
             .registerPharmacyFn(obj)
             .then(res => {
               if (res.data.code == 200) {
+                this.$store.dispatch("setLoading", false)
                 console.log("success");
               } else {
+                this.$store.dispatch("setLoading", false)
                 console.log("fail");
                 messageHandler.errorMessage("Failed", res.data.message);
               }
             })
             .catch(error => {
+              this.$store.dispatch("setLoading", false)
               console.log(error);
               messageHandler.networkError();
             });
@@ -143,13 +147,16 @@ export default {
             .registerLaboratoryFn(obj)
             .then(res => {
               if (res.data.code == 200) {
+                this.$store.dispatch("setLoading", false)
                 console.log("success");
               } else {
+                this.$store.dispatch("setLoading", false)
                 console.log("fail");
                 messageHandler.errorMessage("Failed", res.data.message);
               }
             })
             .catch(error => {
+              this.$store.dispatch("setLoading", false)
               console.log(error);
               messageHandler.networkError();
             });

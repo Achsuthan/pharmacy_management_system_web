@@ -104,18 +104,22 @@ export default {
           email: this.email,
           password: this.password
         };
+        this.$store.dispatch("setLoading", true)
         if(!this.laboratory){
           loginService
           .loginPharmacy(obj)
           .then(res => {
+            this.$store.dispatch("setLoading", false)
             if (res.data.code == 200) {
               console.log("success");
             } else {
+              this.$store.dispatch("setLoading", false)
               console.log("fail");
               messageHandler.errorMessage("Failed", res.data.message);
             }
           })
           .catch(error => {
+            this.$store.dispatch("setLoading", false)
             console.log(error);
             messageHandler.networkError();
           });
@@ -125,13 +129,16 @@ export default {
           .loginLaboratoryFn(obj)
           .then(res => {
             if (res.data.code == 200) {
+              this.$store.dispatch("setLoading", false)
               console.log("success");
             } else {
+              this.$store.dispatch("setLoading", false)
               console.log("fail");
               messageHandler.errorMessage("Failed", res.data.message);
             }
           })
           .catch(error => {
+            this.$store.dispatch("setLoading", false)
             console.log(error);
             messageHandler.networkError();
           });
