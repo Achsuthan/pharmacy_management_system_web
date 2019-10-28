@@ -2,6 +2,7 @@
   <div>
     <Header></Header>
     <router-view></router-view>
+    <notifications group="foo" position="top right"/>
   </div>
 </template>
 
