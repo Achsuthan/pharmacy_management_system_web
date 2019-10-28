@@ -24,28 +24,55 @@
 
 <script>
 
-import { shuffleArray } from '@/shared/utils'
-import cTable from '../Delivery/Table'
-
-const someData = () => shuffleArray([
-  {username: 'Samppa Nori', registered: '2012/01/01', role: 'Member', status: 'Scan QR'},
-  {username: 'Estavan Lykos', registered: '2012/02/01', role: 'Staff', status: 'Scan QR'},
-  
-])
+import { shuffleArray } from "@/shared/utils";
+import cTable from "./Table";
+import orderService from '../../services/order.service'
+import messageHandler from "../../handler/messageHandler";
 export default {
   name: "navs",
   components: {cTable},
-  data: () => {
+ data: () => {
     return {
       isActive: false,
-      items: someData,
-      itemsArray: someData(),
-      fields: [
-        {key: 'username', label: 'User', sortable: true},
-        {key: 'registered'},
-        {key: 'role'},
-        {key: 'status', sortable: true}
-      ],
+      items: [],
+      itemsArray: [],
+      fields: []
+    };
+  },
+  mounted() {
+    this.initFn();
+  },
+  computed:{
+    user(){
+      return this.$store.getters.getUser
+    }
+  },
+  methods: {
+    initFn() {
+      this.$store.dispatch("setLoading", true)
+      let obj = {
+        "pharmacyId": this.user.id
+      }
+      orderService
+        .getReadyForDeliverOrder(obj)
+        .then(res => {
+          if (res.data.status == 200) {
+            console.log("success");
+            this.$store.dispatch("setLoading", false)
+            console.log(res);
+            this.items = shuffleArray(res.data.details);
+            this.itemsArray = shuffleArray(res.data.details);
+            console.log(this.itemsArray);
+          } else {
+            this.$store.dispatch("setLoading", false)
+            messageHandler.errorMessage("Failed", res.data.message);
+          }
+        })
+        .catch(error => {
+          this.$store.dispatch("setLoading", false)
+          console.log(error);
+          messageHandler.networkError();
+        });
     }
   }
 };
