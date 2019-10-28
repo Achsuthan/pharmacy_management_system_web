@@ -65,6 +65,8 @@ export default {
             console.log(this.itemsArray);
           } else {
             this.$store.dispatch("setLoading", false)
+            this.items = []
+            this.itemsArray = []
             messageHandler.errorMessage("Failed", res.data.message);
           }
         })

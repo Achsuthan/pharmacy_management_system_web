@@ -128,7 +128,7 @@ export default {
           loginService
             .registerPharmacyFn(obj)
             .then(res => {
-              if (res.data.code == 200) {
+              if (res.data.status == 200) {
                 var user = res.data.details;
                 user.isPharmacy = true;
                 localStorage.setItem("user", JSON.stringify(user));
@@ -150,7 +150,7 @@ export default {
           loginService
             .registerLaboratoryFn(obj)
             .then(res => {
-              if (res.data.code == 200) {
+              if (res.data.status == 200) {
                 var user = res.data.details;
                 user.isPharmacy = false;
                 localStorage.setItem("user", JSON.stringify(user));

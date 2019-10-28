@@ -185,7 +185,7 @@ export default {
         homeService
           .updateTablets(obj)
           .then(res => {
-            if (res.data.code == 200) {
+            if (res.data.status == 200) {
               console.log("success");
               this.$store.dispatch("setLoading", false)
               this.largeModal = false;

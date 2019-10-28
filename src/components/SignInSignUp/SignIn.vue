@@ -110,7 +110,7 @@ export default {
           .loginPharmacy(obj)
           .then(res => {
             this.$store.dispatch("setLoading", false)
-            if (res.data.code == 200) {
+            if (res.data.status == 200) {
               console.log("success");
               var user = res.data.details
               user.isPharmacy = true
@@ -135,7 +135,7 @@ export default {
           loginService
           .loginLaboratoryFn(obj)
           .then(res => {
-            if (res.data.code == 200) {
+            if (res.data.status == 200) {
               var user = res.data.details
               user.isPharmacy = false
               localStorage.setItem("user", JSON.stringify(user))
