@@ -6,9 +6,9 @@
       </b-link>
         {{pharmacyName}}
       <b-navbar-nav class="d-md-down-none">
-        <b-nav-item class="px-3" to="/home">Home</b-nav-item>
-        <b-nav-item class="px-3" to="/orders" exact>Medicine Orders</b-nav-item>
-        <b-nav-item class="px-3" to="/deliver">Deliver Medicine</b-nav-item>
+        <b-nav-item class="px-3" to="/home">Current Orders</b-nav-item>
+        <b-nav-item class="px-3" to="/orders" exact>Past Orders</b-nav-item>
+        <b-nav-item class="px-3" to="/deliver">Deliver Medicines</b-nav-item>
         <b-nav-item class="px-3" @click="logoutFn">Logout</b-nav-item>
       </b-navbar-nav>
     </AppHeader>

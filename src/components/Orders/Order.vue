@@ -13,7 +13,7 @@
             <c-table
               :table-data="items"
               striped
-              caption="<i class='fa fa-align-justify'></i> Past Order"
+              caption="<i class='fa fa-align-justify'></i> Past Orders"
             ></c-table>
           </b-col>
         </b-row>

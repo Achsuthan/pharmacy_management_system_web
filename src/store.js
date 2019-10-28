@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import homeService from "./services/home";
 import messageHandler from "./handler/messageHandler";
 import { shuffleArray } from "@/shared/utils";
+import orderService from './services/order.service'
 
 Vue.use(Vuex)
 
@@ -43,6 +44,29 @@ export default new Vuex.Store({
                     console.log(error);
                     messageHandler.networkError();
                 });
+        },
+        SET_PRESCRIPTION_FOR_DELIVER(state, payload) {
+            console.log(payload)
+            state.isLoading = true
+            orderService
+                .getReadyForDeliverOrder(payload)
+                .then(res => {
+                    if (res.data.status == 200) {
+                        console.log("success");
+                        state.isLoading = false
+                        console.log(res)
+                        state.prescription = shuffleArray(res.data.details)
+                        console.log(this.itemsArray)
+                    } else {
+                        state.isLoading =  false
+                        messageHandler.errorMessage("Failed", res.data.message);
+                    }
+                })
+                .catch(error => {
+                    state.isLoading =  false
+                    console.log(error);
+                    messageHandler.networkError();
+                });
         }
     },
     actions: {
@@ -54,6 +78,9 @@ export default new Vuex.Store({
         },
         getPrescription({ commit }, payload) {
             commit("SET_PRESCRIPTION", payload)
+        },
+        getPrescriptionForDeliver({ commit }, payload) {
+            commit("SET_PRESCRIPTION_FOR_DELIVER", payload)
         }
     },
     getters: {
