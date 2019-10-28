@@ -5,6 +5,7 @@ import SignUp from './components/SignInSignUp/SignUp'
 import Home from './components/Home/home'
 import Deliver from './components/Delivery/Delivery'
 import Orders from './components/Orders/Order'
+import config from './services/config'
 
 Vue.use(Router)
 
@@ -56,72 +57,48 @@ var router = new Router({
     },
   ]
 })
-// router.beforeEach((to, from, next) => {
-//   console.log(config.checkUser())
-//   if (to.fullPath === '/success') {
-//     if (config.checkUser()) {
-//       next('/');
-//     }
-//   }
-//   if (to.fullPath === '/Createproperty') {
-//     if (!config.checkUser()) {
-//       next('/');
-//     }
-//   }
+router.beforeEach((to, from, next) => {
+  console.log(config.checkUser())
+  if (to.fullPath === '/') {
+    if (config.checkUser()) {
+      next('/home');
+    }
+  }
 
-//   if (to.fullPath === '/TenantProperties') {
-//     if (config.checkUser()) {
-//       next('/');
-//     }
-//   }
+  if (to.fullPath === '/signin') {
+    if (config.checkUser()) {
+      next('/home');
+    }
+  }
 
-//   if (to.fullPath === '/LandlordProperties') {
+  if (to.fullPath === '/signup') {
+    if (config.checkUser()) {
+      next('/home');
+    }
+  }
 
-//     if (!config.checkUser()) {
-//       next('/');
-//     }
-//   }
+  if (to.fullPath === '/home') {
+    if (!config.checkUser()) {
+      next('/');
+    }
+  }
 
-//   if (to.fullPath === '/Favourite') {
-//     if (config.checkUser()) {
-//       next('/');
-//     }
-//   }
+  if (to.fullPath === '/orders') {
+    if (!config.checkUser()) {
+      next('/');
+    }
+  }
 
-//   if (to.fullPath === '/PropertyHome') {
-//     if (!config.checkUser()) {
-//       next('/');
-//     }
-//   }
-
-//   if (to.fullPath === '/saleproperty') {
-//     if (!config.checkUser()) {
-//       next('/');
-//     }
-//   }
-
-//   if (to.fullPath === '/wantedproperty') {
-//     if (!config.checkUser()) {
-//       next('/');
-//     }
-//   }
-
+  if (to.fullPath === '/deliver') {
+    if (!config.checkUser()) {
+      next('/');
+    }
+  }
   
 
-//   if (to.fullPath === '/Contract') {
-//     next('/');
-//   }
+  next()
 
 
-
-//   if (to.fullPath === '/adminopen') {
-//     next('/adminopen');
-//   }
-
-
-//   next()
-
-
-// });
+});
 
 export default router
