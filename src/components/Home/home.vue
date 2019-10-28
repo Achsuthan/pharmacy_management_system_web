@@ -7,7 +7,7 @@
           <strong></strong>
           <small></small>
         </div>
-        
+
         <b-row>
           <b-col lg="12">
             <c-table
@@ -23,29 +23,33 @@
 </template>
 
 <script>
+import cTable from "./Table";
 
-import { shuffleArray } from '@/shared/utils'
-import cTable from './Table'
-
-const someData = () => shuffleArray([
-  {username: 'Samppa Nori', registered: '2012/01/01', role: 'Member', status: 'Accept'},
-  {username: 'Estavan Lykos', registered: '2012/02/01', role: 'Staff', status: 'Reject'},
-  
-])
 export default {
   name: "navs",
-  components: {cTable},
+  components: { cTable },
   data: () => {
     return {
       isActive: false,
-      items: someData,
-      itemsArray: someData(),
       fields: [
-        {key: 'username', label: 'User', sortable: true},
-        {key: 'registered'},
-        {key: 'role'},
-        {key: 'status', sortable: true}
-      ],
+       
+      ]
+    };
+  },
+  mounted() {
+    this.initFn();
+  },
+  computed:{
+    items(){
+      return this.$store.getters.getPrescription
+    },
+    itemsArray(){
+      return this.$store.getters.getPrescription
+    }
+  },
+  methods: {
+    initFn() {
+      this.$store.dispatch("getPrescription")
     }
   }
 };
