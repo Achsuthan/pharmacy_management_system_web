@@ -112,6 +112,13 @@ export default {
             this.$store.dispatch("setLoading", false)
             if (res.data.code == 200) {
               console.log("success");
+              var user = res.data.details
+              user.isPharmacy = true
+              console.log(user)
+              localStorage.setItem("user", JSON.stringify(user))
+              this.$store.dispatch("setUser", user)
+              this.$router.push("home")
+              this.$store.dispatch("setLoading", false);
             } else {
               this.$store.dispatch("setLoading", false)
               console.log("fail");
@@ -129,7 +136,12 @@ export default {
           .loginLaboratoryFn(obj)
           .then(res => {
             if (res.data.code == 200) {
+              var user = res.data.details
+              user.isPharmacy = false
+              localStorage.setItem("user", JSON.stringify(user))
               this.$store.dispatch("setLoading", false)
+              this.$store.dispatch("setUser", user)
+              this.$router.push("home")
               console.log("success");
             } else {
               this.$store.dispatch("setLoading", false)

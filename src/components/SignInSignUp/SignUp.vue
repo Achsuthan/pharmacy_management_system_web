@@ -123,22 +123,26 @@ export default {
           email: this.email,
           password: this.password
         };
-        this.$store.dispatch("setLoading", true)
+        this.$store.dispatch("setLoading", true);
         if (!this.laboratory) {
           loginService
             .registerPharmacyFn(obj)
             .then(res => {
               if (res.data.code == 200) {
-                this.$store.dispatch("setLoading", false)
-                console.log("success");
+                var user = res.data.details;
+                user.isPharmacy = true;
+                localStorage.setItem("user", JSON.stringify(user));
+                this.$store.dispatch("setUser", user);
+                this.$router.push("home");
+                this.$store.dispatch("setLoading", false);
               } else {
-                this.$store.dispatch("setLoading", false)
+                this.$store.dispatch("setLoading", false);
                 console.log("fail");
                 messageHandler.errorMessage("Failed", res.data.message);
               }
             })
             .catch(error => {
-              this.$store.dispatch("setLoading", false)
+              this.$store.dispatch("setLoading", false);
               console.log(error);
               messageHandler.networkError();
             });
@@ -147,16 +151,21 @@ export default {
             .registerLaboratoryFn(obj)
             .then(res => {
               if (res.data.code == 200) {
-                this.$store.dispatch("setLoading", false)
+                var user = res.data.details;
+                user.isPharmacy = false;
+                localStorage.setItem("user", JSON.stringify(user));
+                this.$store.dispatch("setLoading", false);
+                this.$store.dispatch("setUser", user);
+                this.$router.push("home");
                 console.log("success");
               } else {
-                this.$store.dispatch("setLoading", false)
+                this.$store.dispatch("setLoading", false);
                 console.log("fail");
                 messageHandler.errorMessage("Failed", res.data.message);
               }
             })
             .catch(error => {
-              this.$store.dispatch("setLoading", false)
+              this.$store.dispatch("setLoading", false);
               console.log(error);
               messageHandler.networkError();
             });
