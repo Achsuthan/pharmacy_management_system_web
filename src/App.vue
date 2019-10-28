@@ -1,6 +1,8 @@
 <template>
   <div>
-    <Header></Header>
+    <template v-if="isUser">
+      <Header></Header>
+    </template>
     <router-view></router-view>
     <loading
       :active.sync="isLoading"
@@ -37,6 +39,9 @@ export default {
   computed:{
     isLoading(){
       return this.$store.getters.getLoading
+    },
+    isUser(){
+      return this.$store.getters.getCheckUser
     }
   },
   beforeMount(){
