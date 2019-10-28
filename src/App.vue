@@ -2,7 +2,13 @@
   <div>
     <Header></Header>
     <router-view></router-view>
-    <notifications group="foo" position="top right"/>
+     <loading
+      :active.sync="isLoading"
+      :can-cancel="false"
+      :is-full-page="fullPage"
+      :loader="dots"
+      :color="color"
+    ></loading>
   </div>
 </template>
 
@@ -10,13 +16,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Header from './components/Header/Header'
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 Vue.use(VueRouter)
 
 export default {
   name: 'app',
+  data(){
+    return {
+      fullPage: true,
+      dots: "dots",
+      color: "#012847",
+    };
+  },
   components:{
-    Header
+    Header,
+    Loading
+  },
+  computed:{
+    isLoading(){
+      return this.$store.getters.getLoading
+    }
   }
 }
 </script>
