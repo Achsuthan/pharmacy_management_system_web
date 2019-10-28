@@ -4,6 +4,7 @@
       <b-link class="navbar-brand" to="/home">
         PMS
       </b-link>
+        Pharmacy Name
       <b-navbar-nav class="d-md-down-none">
         <b-nav-item class="px-3" to="/home">Home</b-nav-item>
         <b-nav-item class="px-3" to="/orders" exact>Medicine Orders</b-nav-item>
