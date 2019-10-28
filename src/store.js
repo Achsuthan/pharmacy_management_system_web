@@ -36,6 +36,7 @@ export default new Vuex.Store({
                         console.log(this.itemsArray)
                     } else {
                         state.isLoading =  false
+                        state.prescription = []
                         messageHandler.errorMessage("Failed", res.data.message);
                     }
                 })
@@ -56,9 +57,9 @@ export default new Vuex.Store({
                         state.isLoading = false
                         console.log(res)
                         state.prescription = shuffleArray(res.data.details)
-                        console.log(this.itemsArray)
                     } else {
                         state.isLoading =  false
+                        state.prescription = []
                         messageHandler.errorMessage("Failed", res.data.message);
                     }
                 })
