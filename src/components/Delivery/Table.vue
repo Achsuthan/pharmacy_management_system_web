@@ -15,8 +15,8 @@
       :per-page="perPage"
       @row-clicked="rowClicked"
     >
-      <template slot="status" slot-scope="data">
-        <b-button size="sm" class="mr-2" @click="largeModal = true">{{data.item.status}}</b-button>
+      <template slot="Status" slot-scope="data">
+        <b-button size="sm" class="mr-2" @click="largeModal = true">{{data.item.Status}}</b-button>
       </template>
     </b-table>
     <nav>
