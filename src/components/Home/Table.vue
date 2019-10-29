@@ -33,18 +33,20 @@
     </nav>
     <b-modal title="Details" size="lg" hide-footer v-model="largeModal">
       <b-row>
-        <b-col lg="3">ID</b-col>
+        <b-col lg="2">ID</b-col>
         <b-col lg="3">Tablet Name</b-col>
         <b-col lg="3">Time</b-col>
-        <b-col lg="3">Available</b-col>
+        <b-col lg="2">Duration</b-col>
+        <b-col lg="2">Available</b-col>
       </b-row>
 
       <template v-for="(item,index) in tablets">
         <b-row :key="index">
-          <b-col lg="3">{{item.id}}</b-col>
+          <b-col lg="2">{{item.id}}</b-col>
           <b-col lg="3">{{item.tablet_name}}</b-col>
           <b-col lg="3">{{item.time}}</b-col>
-          <b-col lg="3">
+          <b-col lg="2">{{item.duration}}</b-col>
+          <b-col lg="2">
             <input type="checkbox" v-model="item.isAvailable" />
           </b-col>
         </b-row>
